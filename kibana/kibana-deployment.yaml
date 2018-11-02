@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: kibana
@@ -6,6 +6,7 @@ spec:
   selector:
     matchLabels:
       run: kibana
+  replicas: 1
   template:
     metadata:
       labels:
@@ -17,8 +18,10 @@ spec:
         env:
         - name: ELASTICSEARCH_URL
           value: http://elasticsearch:9200
+        - name: GET_HOSTS_FROM
+          value: dns        
         - name: XPACK_SECURITY_ENABLED
-          value: true
+          value: "false"
         ports:
         - containerPort: 5601
           name: http

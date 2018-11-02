@@ -3,14 +3,12 @@ kind: Service
 metadata:
   name: elasticsearch
   labels:
-    app: elasticsearch
-    tier: monitoring
+    run: elasticsearch
 spec:
-  type: NodePort
-  ports:
-    - port: 9200
-      targetPort: 9200
-      protocol: TCP
+  type: LoadBalancer
   selector:
-    app: elasticsearch
-    tier: monitoring
+    run: elasticsearch
+  ports:
+  - name: http-elastic
+    port: 9200
+    protocol: TCP

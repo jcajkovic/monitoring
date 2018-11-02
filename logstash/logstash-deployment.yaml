@@ -26,6 +26,9 @@ spec:
       containers:
       - image: elastic/logstash:6.4.2
         name: logstash
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
         ports:
         - containerPort: 5044
           name: beats
